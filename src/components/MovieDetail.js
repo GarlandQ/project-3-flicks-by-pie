@@ -1,10 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import styles from 'styles/pages/Home.module.scss';
-import Link from 'next/link';
 
 
-const MovieDetail = ({id, title, poster_path, overview, vote_average, runtime, release_date}) => {
+const MovieDetail = ({title, poster_path, overview, vote_average, runtime, release_date}) => {
     const IMG_API = "https://image.tmdb.org/t/p/w500";
 
     return (

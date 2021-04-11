@@ -21,6 +21,22 @@ a {
   box-sizing: border-box;
 }
 
+// Swiper CSS
+.swiper-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem;
+  margin-top: 1px;
+}
+
+.swiper-slide {
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
 // Styling for components
 .movie-container {
   display: flex;
@@ -29,31 +45,42 @@ a {
 
 .movie-list {
   margin: 0.5rem;
-  width: 200px;
+  width: 250px;
   color: #ffffff;
-  border-radius: 2px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
   position: relative;
-  overflow: hidden;
-  margin-top: 100px;
 }
 
 .movie-title {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0.3rem;
 }
 
 .movie-list img {
   max-width: 100%;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .search-bar {
   background: rgba(0, 0, 0, 0.23);
   width: 100%;
-  position: fixed;
+  position: inherit;
   padding: 0.8rem;
   display: flex;
   justify-content: flex-end;
+}
+
+.search {
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: 2px;
+  padding: 0.25rem 0.75rem;
+}
+
+h2 {
+  color: #ffffff;
+  margin: 1rem;
+  padding: 0.3rem;
 }
