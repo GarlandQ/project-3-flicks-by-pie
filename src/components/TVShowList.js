@@ -1,23 +1,22 @@
 import React from 'react';
 import SwiperCore, { Navigation } from 'swiper';
 import Link from 'next/link';
-import Router from 'next/router';
-
 
 SwiperCore.use([Navigation]);
 
 
-const MovieList = ({id, title, poster_path}) => {
+const TVShowList = ({id, name, poster_path}) => {
     const IMG_API = "https://image.tmdb.org/t/p/w500";
 
     return (
         <>
             <div className="show-list">
-                <Link href={"/movie/" + id} key={id}>
-                    <img src={IMG_API + poster_path} alt={title}></img>
+                <Link href={"/tvshow/" + id} key={id}>
+                    <img src={IMG_API + poster_path} alt={name}></img>
                 </Link>
+                
                 <div className="show-title">
-                    <h3>{title}</h3>
+                    <h3>{name}</h3>
                 </div>
             </div>
         </>
@@ -25,4 +24,4 @@ const MovieList = ({id, title, poster_path}) => {
 };
 
 
-export default MovieList;
+export default TVShowList;

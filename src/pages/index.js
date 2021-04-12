@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import React from 'react';
+import Link from 'next/link';
 
 import MovieList from "components/MovieList";
-import MovieDetail from "components/MovieDetail";
+import TVShowList from "components/TVShowList";
 
-import styles from 'styles/pages/Home.module.scss';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import PropTypes from 'prop-types';
@@ -28,17 +28,12 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   
 
-  // useEffect(() => {
-  //   fetch(UPCOMING_MOVIES_API).then((res) => res.json()).then((data) => {
-  //     setMovies(data.results);
-  //   })
-  // }, []);
-
   useEffect(() => {
     async function getUpcomingMovies() {
       try {
         const response = await fetch(UPCOMING_MOVIES_API);
         const json = await response.json();
+        // console.log(json.results);
         setUpcomingMovies(json.results);
       }
       catch (e) {
@@ -53,6 +48,7 @@ function Home() {
       try {
         const response = await fetch(TRENDING_MOVIES_API);
         const json = await response.json();
+        // console.log(json.results);
         setTrendingMovies(json.results);
       }
       catch (e) {
@@ -67,6 +63,7 @@ function Home() {
       try {
         const response = await fetch(TRENDING_TVSHOWS_API);
         const json = await response.json();
+        // console.log(json.results);
         setTrendingTVShows(json.results);
       }
       catch (e) {
@@ -83,19 +80,8 @@ function Home() {
     if (searchTerm) {
       fetch(SEARCH_API + searchTerm).then((res) => res.json()).then((data) => {
         console.log(data);
-        setMovies(data.results);
+        setSearchTerm(data.results);
       });
-      // async function getSearchResults() {
-      //   try {
-      //     let url = SEARCH_API + searchTerm;
-      //     const response = await fetch(url);
-      //     const json = await response.json();
-      //     setMovies(json.results);
-      //   }
-      //   catch (e) {
-      //     console.error(e);
-      //   }
-      // };
       setSearchTerm('');
     }
       
@@ -108,6 +94,10 @@ function Home() {
 
   return (
     <>
+      <Head>
+        <title>Flicks by PIE</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <header className="search-bar">
         <form onSubmit={handleOnSubmit}>
           <input 
@@ -119,7 +109,7 @@ function Home() {
         </form>
       </header>
       
-      <div className="movie-container">
+      <div className="show-container">
         <h2>Upcoming Movies</h2>
         {upcomingMovies.length > 0 ?
           <Swiper
@@ -135,11 +125,11 @@ function Home() {
             </SwiperSlide>))}
           </Swiper>
           :
-            <h2>No results.</h2>
+            <h2></h2>
         }
       </div>
 
-      <div className="movie-container">
+      <div className="show-container">
         <h2>Trending Movies</h2>
         {trendingMovies.length > 0 ?
           <Swiper
@@ -155,11 +145,11 @@ function Home() {
             </SwiperSlide>))}
           </Swiper>
           :
-            <h2>No results.</h2>
+            <h2></h2>
         }
       </div>
 
-      <div className="movie-container">
+      <div className="show-container">
         <h2>Trending TV Shows</h2>
         {trendingTVShows.length > 0 ?
           <Swiper
@@ -169,13 +159,13 @@ function Home() {
             navigation
             pagination={{ clickable: true }}
           >
-            {trendingTVShows.length > 0 && trendingTVShows.map((trendingTVShow) => (
-            <SwiperSlide key={trendingTVShow.id}>
-              <MovieList key={trendingTVShow.id} {...trendingTVShow} />
+            {trendingTVShows.length > 0 && trendingTVShows.map((trendingTVShows) => (
+            <SwiperSlide key={trendingTVShows.id}>
+              <TVShowList key={trendingTVShows.id} {...trendingTVShows} />
             </SwiperSlide>))}
           </Swiper>
           :
-            <h2>No results.</h2>
+            <h2></h2>
         }
       </div>
     </>
