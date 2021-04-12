@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import MovieList from "components/MovieList";
 import TVShowList from "components/TVShowList";
+import SearchResults from "components/SearchResults";
 
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -18,7 +19,7 @@ SwiperCore.use([Navigation, Pagination]);
 const UPCOMING_MOVIES_API = "https://api.themoviedb.org/3/movie/upcoming?api_key=e0ae2441f2fc238a8149d29a2fd0b99e";
 const TRENDING_MOVIES_API = "https://api.themoviedb.org/3/trending/movie/week?api_key=e0ae2441f2fc238a8149d29a2fd0b99e"
 const TRENDING_TVSHOWS_API = "https://api.themoviedb.org/3/trending/tv/week?api_key=e0ae2441f2fc238a8149d29a2fd0b99e"
-const SEARCH_API = "https://api.themoviedb.org/3/search/multi?api_key=e0ae2441f2fc238a8149d29a2fd0b99e&language=en-US&query="
+const SEARCH_API = "https://api.themoviedb.org/3/search/multi?api_key=e0ae2441f2fc238a8149d29a2fd0b99e&query="
 
 
 function Home() {
@@ -26,6 +27,7 @@ function Home() {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [trendingTVShows, setTrendingTVShows] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
   
 
   useEffect(() => {
@@ -74,22 +76,35 @@ function Home() {
   }, []);
 
 
-  const handleOnSubmit = (e) => {
+  // const handleOnSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   fetch(SEARCH_API + searchTerm).then((res) => res.json()).then((data) => {
+  //     console.log(data);
+  //     setSearchTerm(data.results);
+  //   });
+  //   setSearchTerm('');
+    
+    
+  // };
+
+  // const handleOnChange = (e) => {
+  //   setSearchTerm(e.target.value);
+  // };
+  
+  const searchShows = async (e) => {
     e.preventDefault();
-
-    if (searchTerm) {
-      fetch(SEARCH_API + searchTerm).then((res) => res.json()).then((data) => {
-        console.log(data);
-        setSearchTerm(data.results);
-      });
-      setSearchTerm('');
+    console.log("Searching...");
+    try {
+      const response = await fetch(SEARCH_API + searchTerm);
+      const json = await response.json();
+      console.log(json.results);
+      setSearchResult(json.results);
     }
-      
-  };
-
-  const handleOnChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+    catch (e) {
+      console.error(e);
+    }
+  }
 
 
   return (
@@ -98,16 +113,22 @@ function Home() {
         <title>Flicks by PIE</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <header className="search-bar">
-        <form onSubmit={handleOnSubmit}>
+      <header className="header-bar">
+        <Link href={"/"}>
+          <img className="logo" src = {"/static/images/pielogo.svg"} alt="Home"></img>
+        </Link>
+        <form onSubmit={searchShows}>
           <input 
             className="search" 
             type="search" 
             placeholder="Search" 
             value={searchTerm}
-            onChange={handleOnChange}/>
+            onChange={(e) => setSearchTerm(e.target.value)}
+            />
         </form>
       </header>
+
+      
       
       <div className="show-container">
         <h2>Upcoming Movies</h2>
@@ -168,6 +189,12 @@ function Home() {
             <h2></h2>
         }
       </div>
+
+      <footer className="footer-bar">
+        <h4>© 2021 PIE LLC</h4>
+        <p>Movie Data Provided By <img className="logo" src = {"/static/images/tmdblogo.svg"} alt="TMDB"></img>
+        </p>
+      </footer>
     </>
   );
 

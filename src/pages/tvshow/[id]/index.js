@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react';
-import TVShowDetails from 'components/TVShowDetails';
+import TVShowDetail from 'components/TVShowDetail';
 
 
 const DETAIL_URL = "https://api.themoviedb.org/3/tv/";
@@ -14,15 +14,6 @@ function Details() {
     const [showDetails, setShowDetails] = useState([]);
     
     const router = useRouter();
-    // const { id } = router.query;
-    
-    // useEffect(() => {
-    //     if(!id) {
-    //         return;
-    //     }
-    // }, [id]);
-    
-    //const API_URL = DETAIL_URL + id + API_KEY;
 
     useEffect(() => {
         
@@ -41,7 +32,7 @@ function Details() {
             // console.log(json.results);
             // setShowDetails(json.results);
             fetch(url).then((res) => res.json()).then((data) => {
-                console.log(data);
+                // console.log(data);
                 setShowDetails(data);
             })
         };
@@ -55,11 +46,19 @@ function Details() {
             <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         </Head>
         <div className="show-container">
-            <Link href={"/"}>
-                Home
-            </Link>
-            {<TVShowDetails key={showDetails.id} {...showDetails} />}
+            <header className="header-bar">
+                <Link href={"/"}>
+                    <img className="logo" src = {"/static/images/pielogo.svg"} alt="Home"></img>
+                </Link>
+            </header>
+            {<TVShowDetail key={showDetails.id} {...showDetails} />}
         </div>
+
+        <footer className="footer-bar">
+            <h4>© 2021 PIE LLC</h4>
+            <p>Movie Data Provided By <img className="logo" src = {"/static/images/tmdblogo.svg"} alt="TMDB"></img>
+            </p>
+        </footer>
         </>
     )
 
@@ -67,9 +66,3 @@ function Details() {
 
 export default Details;
 
-// Details.getInitialProps = async (context) => {
-//     const response = await fetch(DETAIL_URL + id + API_KEY);
-//     const json = await response.json();
-//     console.log(json.results);
-//     return { showID: json.results };
-// }
