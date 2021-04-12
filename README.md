@@ -9,11 +9,11 @@ Time spent: **XX** hours spent in total
 
 The following **required** functionality is completed:
 
-- [ ] User can see at least the latest 10 [upcoming movies](https://developers.themoviedb.org/3/movies/get-upcoming) from the database API
-- [ ] User can see at least the latest 10 [trending movies](https://developers.themoviedb.org/3/trending/get-trending) from the database API
-- [ ] User can see at least the latest 10 [trending tv shows](https://developers.themoviedb.org/3/trending/get-trending) from the database API
+- [x] User can see at least the latest 10 [upcoming movies](https://developers.themoviedb.org/3/movies/get-upcoming) from the database API
+- [x] User can see at least the latest 10 [trending movies](https://developers.themoviedb.org/3/trending/get-trending) from the database API
+- [x] User can see at least the latest 10 [trending tv shows](https://developers.themoviedb.org/3/trending/get-trending) from the database API
 
-- [ ] Clicking on a movie/tv takes the user to a new page where the User can see the details of [a movie](https://developers.themoviedb.org/3/movies/get-movie-details) or [tv show](https://developers.themoviedb.org/3/tv/get-tv-details) including the rating, runtime (movies only) and release year
+- [x] Clicking on a movie/tv takes the user to a new page where the User can see the details of [a movie](https://developers.themoviedb.org/3/movies/get-movie-details) or [tv show](https://developers.themoviedb.org/3/tv/get-tv-details) including the rating, runtime (movies only) and release year
 
 The following **optional** features are implemented:
 - [ ] All views are implemented according to the specified design documents
