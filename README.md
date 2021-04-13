@@ -3,7 +3,7 @@
 
 **Flicks** - A movie website commissioned by PIE LLC
 
-Time spent: **XX** hours spent in total
+Time spent: **~8** hours spent in total
 
 ## User Stories
 
