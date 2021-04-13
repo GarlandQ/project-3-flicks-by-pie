@@ -6,6 +6,7 @@ import Link from 'next/link';
 import MovieList from "components/MovieList";
 import TVShowList from "components/TVShowList";
 import SearchResults from "components/SearchResults";
+import RandomMovie from "components/RandomMovie";
 
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -19,15 +20,16 @@ SwiperCore.use([Navigation, Pagination]);
 const UPCOMING_MOVIES_API = "https://api.themoviedb.org/3/movie/upcoming?api_key=e0ae2441f2fc238a8149d29a2fd0b99e";
 const TRENDING_MOVIES_API = "https://api.themoviedb.org/3/trending/movie/week?api_key=e0ae2441f2fc238a8149d29a2fd0b99e"
 const TRENDING_TVSHOWS_API = "https://api.themoviedb.org/3/trending/tv/week?api_key=e0ae2441f2fc238a8149d29a2fd0b99e"
-const SEARCH_API = "https://api.themoviedb.org/3/search/multi?api_key=e0ae2441f2fc238a8149d29a2fd0b99e&query="
+// const SEARCH_API = "https://api.themoviedb.org/3/search/multi?api_key=e0ae2441f2fc238a8149d29a2fd0b99e&query="
 
 
 function Home() {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [trendingTVShows, setTrendingTVShows] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResult, setSearchResult] = useState([]);
+  const [randomMovie, setRandomMovie] = useState([]);
+  // const [searchTerm, setSearchTerm] = useState('');
+  // const [searchResult, setSearchResult] = useState([]);
   
 
   useEffect(() => {
@@ -75,36 +77,38 @@ function Home() {
     getTrendingTVShows();
   }, []);
 
+  useEffect(() => {
+    async function getRandomTrendingMovie() {
+      try {
+        const response = await fetch(TRENDING_MOVIES_API);
+        const json = await response.json();
+        // console.log(json.results);
+        let randomMovie = json.results[Math.floor(Math.random() * json.results.length)];
+        setRandomMovie(randomMovie);
+        console.log(randomMovie.id);
+        console.log(randomMovie);
+        return randomMovie;
+      }
+      catch (e) {
+        console.error(e);
+      }
+    };
+    getRandomTrendingMovie();
+  }, []);
 
-  // const handleOnSubmit = (e) => {
+  // const searchShows = async (e) => {
   //   e.preventDefault();
-
-  //   fetch(SEARCH_API + searchTerm).then((res) => res.json()).then((data) => {
-  //     console.log(data);
-  //     setSearchTerm(data.results);
-  //   });
-  //   setSearchTerm('');
-    
-    
-  // };
-
-  // const handleOnChange = (e) => {
-  //   setSearchTerm(e.target.value);
-  // };
-  
-  const searchShows = async (e) => {
-    e.preventDefault();
-    console.log("Searching...");
-    try {
-      const response = await fetch(SEARCH_API + searchTerm);
-      const json = await response.json();
-      console.log(json.results);
-      setSearchResult(json.results);
-    }
-    catch (e) {
-      console.error(e);
-    }
-  }
+  //   console.log("Searching...");
+  //   try {
+  //     const response = await fetch(SEARCH_API + searchTerm);
+  //     const json = await response.json();
+  //     console.log(json.results);
+  //     setSearchResult(json.results);
+  //   }
+  //   catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
 
   return (
@@ -117,7 +121,7 @@ function Home() {
         <Link href={"/"}>
           <img className="logo" src = {"/static/images/pielogo.svg"} alt="Home"></img>
         </Link>
-        <form onSubmit={searchShows}>
+        {/* <form onSubmit={searchShows}>
           <input 
             className="search" 
             type="search" 
@@ -125,10 +129,12 @@ function Home() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             />
-        </form>
+        </form> */}
       </header>
 
-      
+      <div className="hero-container">
+        {<RandomMovie key={randomMovie.id} {...randomMovie} />}
+      </div>
       
       <div className="show-container">
         <h2>Upcoming Movies</h2>
