@@ -39,6 +39,10 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 Describe any challenges encountered while building the app.
 
+One of the challenges was simply learning React and seeing how to use NextJS, especially the router by NextJS. One of the reasons 
+the router was a huge issue was due to how the pages were being rendered and I had to figure out how to work around the fact that
+pages were not loading in with the correct id for me to use on the TMDB API.
+
 ## License
 
     Copyright [Year] [Name]
