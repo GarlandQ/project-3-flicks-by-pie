@@ -18,7 +18,7 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 - [ ] All views are implemented according to the specified design documents
 - [ ] User can search for a [movie or tv show](https://developers.themoviedb.org/3/search/multi-search) and view its details
-- [ ] The Home page contains a randomized hero image of a video poster or a carousel of video poster
+- [x] The Home page contains a randomized hero image of a video poster or a carousel of video poster
 - [ ] All pages are responsive according to developer defined breakpoints
 
 ## TESTING
