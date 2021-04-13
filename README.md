@@ -23,15 +23,15 @@ The following **optional** features are implemented:
 
 ## TESTING
 
-Code Coverage: [insert_coverage_here]
+Code Coverage: []
 
-A coverage report is included at: [insert coverage report path]
+A coverage report is included at: []
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='[insert_gif_source_here]' title='Video Walkthrough' alt='Video Walkthrough' />
+<img src='https://github.com/notabela-org/project-3-flicks-by-pie-GarlandQ/blob/main/movieapp.gif' title='Video Walkthrough' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
